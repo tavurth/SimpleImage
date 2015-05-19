@@ -2,20 +2,20 @@
 
 /*
 
-Copyright 2014 William Whitty
-will.whitty.arbeit@gmail.com
+  Copyright 2014 William Whitty
+  will.whitty.arbeit@gmail.com
 
-Licensed under the Apache License, Version 2.0 (the 'License');
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+  Licensed under the Apache License, Version 2.0 (the 'License');
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+  http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an 'AS IS' BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an 'AS IS' BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
 
 */
 
@@ -149,8 +149,8 @@ if (defined('TAVURTH_IMAGE_V2') == FALSE) {
 				if (isset($this->colors[$name]))
 					$this->color_remove($name);
 				switch (func_num_args()) {
-					case 4: $this->colors[$name] = imagecolorallocate($this->image_, $r, $g, $b); break;
-					case 5: $this->colors[$name] = imagecolorallocatealpha($this->image_, $r, $g, $b, $a); 
+                case 4: $this->colors[$name] = imagecolorallocate($this->image_, $r, $g, $b); break;
+                case 5: $this->colors[$name] = imagecolorallocatealpha($this->image_, $r, $g, $b, $a); 
 				}
 				return $this->colors[$name];
 			}
@@ -191,8 +191,8 @@ if (defined('TAVURTH_IMAGE_V2') == FALSE) {
 		}
 		public function color_set_pixel($x, $y, $r, $g, $b, $a = FALSE) {
 			switch (func_num_args()) {
-				case 6: $rgb = imagecolorallocatealpha($this->image_, $r, $g, $b, $a); break;
-				default: $rgb = imagecolorallocate($this->image_, $r, $g, $b); 
+            case 6: $rgb = imagecolorallocatealpha($this->image_, $r, $g, $b, $a); break;
+            default: $rgb = imagecolorallocate($this->image_, $r, $g, $b); 
 			}
 			$this->set_pixel($x,$y,$rgb);
 			imagecolordeallocate($this->image_, $rgb);
@@ -218,14 +218,14 @@ if (defined('TAVURTH_IMAGE_V2') == FALSE) {
 			if ($header)
 				header('Content-Type: image/'.$type);
 			switch ($type) {
-				case 'png':
-					return imagepng($this->image_, $file);
-					break;
-				case 'jpg':
-					return imagejpeg($this->image_, $file);
-					break;
-				default:
-					return;
+            case 'png':
+                return imagepng($this->image_, $file);
+                break;
+            case 'jpg':
+                return imagejpeg($this->image_, $file);
+                break;
+            default:
+                return;
 			}
 		}
 		
@@ -267,15 +267,15 @@ if (defined('TAVURTH_IMAGE_V2') == FALSE) {
 		//////////////////////////////////////////////////////////////////////////////////
 		
 		public function draw_ttf_string($size, $x, $y, $string, $color, $angle = 0) {
-		//Draw a string to the screen using a TTF
+            //Draw a string to the screen using a TTF
 			if (!file_exists($this->font))
-				{ echo('Filename ' . $this->font . ' not found.'); return; }
+            { echo('Filename ' . $this->font . ' not found.'); return; }
 			
 			if (function_exists('imagettftext'))
 				imagettftext($this->image_, $size, $angle, $x, $y, $this->color($color), $this->font, $string);
 		}
 		public function ttf_size($size, $string, $angle = 0) {
-		//Return an array of the string bounding box for a TTF
+            //Return an array of the string bounding box for a TTF
 			//	0	lower left corner, X position
 			//	1	lower left corner, Y position
 			//	2	lower right corner, X position
@@ -353,25 +353,25 @@ if (defined('TAVURTH_IMAGE_V2') == FALSE) {
 			$this->draw_rect(0, 0, $this->width(), $paddingY1, 'BACKG');
 			
 			$this->draw_line($this->width()-$paddingX2, 
-											$paddingY1, 
-											$this->width()-$paddingX2, 
-											$this->height()-$paddingY2,
-											$color);
+                             $paddingY1, 
+                             $this->width()-$paddingX2, 
+                             $this->height()-$paddingY2,
+                             $color);
 			$this->draw_line($this->width()-$paddingX2, 
-											$this->height()-$paddingY2,
-											$paddingX1,
-											$this->height()-$paddingY2, 
-											$color);
+                             $this->height()-$paddingY2,
+                             $paddingX1,
+                             $this->height()-$paddingY2, 
+                             $color);
 			$this->draw_line($paddingX1,
-											$paddingY1,
-											$paddingX1, 
-											$this->height()-$paddingY2,
-											$color);
+                             $paddingY1,
+                             $paddingX1, 
+                             $this->height()-$paddingY2,
+                             $color);
 			$this->draw_line($paddingX1,
-								 			$paddingY1,
-											$this->width()-$paddingX2,
-											$paddingY1,
-											$color);
+                             $paddingY1,
+                             $this->width()-$paddingX2,
+                             $paddingY1,
+                             $color);
 		}
 		
 		public function round_corners($size, $color='ALPHA+') {
@@ -464,10 +464,10 @@ if (defined('TAVURTH_IMAGE_V2') == FALSE) {
 		public function filter($filter, $arg1=NULL, $arg2=NULL, $arg3=NULL) {
 			if (function_exists('imagefilter'))
 				switch (func_num_args()) {
-					case 1: imagefilter($this->image_,$filter); break;
-					case 2: imagefilter($this->image_,$filter,$arg1); break;
-					case 3: imagefilter($this->image_,$filter,$arg1,$arg2); break;
-					case 4: imagefilter($this->image_,$filter,$arg1,$arg2,$arg3); break;
+                case 1: imagefilter($this->image_,$filter); break;
+                case 2: imagefilter($this->image_,$filter,$arg1); break;
+                case 3: imagefilter($this->image_,$filter,$arg1,$arg2); break;
+                case 4: imagefilter($this->image_,$filter,$arg1,$arg2,$arg3); break;
 				}
 			else 
 				echo 'Could not utilize function imagefilter<br>';
@@ -479,10 +479,10 @@ if (defined('TAVURTH_IMAGE_V2') == FALSE) {
 			}
 		}
 		public function flip() {
-		//
-		//	SOURCE: http://maettig.com/?page=PHP/imageflip
-		//	MODIFIED
-		//
+            //
+            //	SOURCE: http://maettig.com/?page=PHP/imageflip
+            //	MODIFIED
+            //
 			$this->rotate(180, 'BACKG');
 			$image = $this->image_;
 			$width  = imagesx($image);
@@ -496,12 +496,12 @@ if (defined('TAVURTH_IMAGE_V2') == FALSE) {
 			
 			$x2 = $width - 1;
 			for ($i = (int) floor(($width - 1) / 2); $i >= 0; $i--) {
-			// Backup right stripe.
-			imagecopy($tmp,   $image, 0,        0,  $x2 - $i, 0, 1, $height);
-			// Copy left stripe to the right.
-			imagecopy($image, $image, $x2 - $i, 0, $i,  0, 1, $height);
-			// Copy backuped right stripe to the left.
-			imagecopy($image, $tmp,   $i,  0,   0,       0,  1, $height);
+                // Backup right stripe.
+                imagecopy($tmp,   $image, 0,        0,  $x2 - $i, 0, 1, $height);
+                // Copy left stripe to the right.
+                imagecopy($image, $image, $x2 - $i, 0, $i,  0, 1, $height);
+                // Copy backuped right stripe to the left.
+                imagecopy($image, $tmp,   $i,  0,   0,       0,  1, $height);
 			}
 			
 			imagedestroy($tmp);
