@@ -389,7 +389,12 @@ if (defined('TAVURTH_IMAGE_V2') == FALSE) {
 		//	COPY FUNCTIONS
 		//
 		//////////////////////////////////////////////////////////////////////////////////
-		
+
+        public function resize($width, $height) {
+            $newGd = imagecreatetruecolor($width, $height);
+            imagecopyresized($newGd, $this->image_,  0, 0, 0, 0, $width, $height, $this->width(), $this->height());
+            $this->image_ = $newGd;
+        }
 		public function copy_resize_gd($image, $x, $y, $sx, $sy, $w, $h, $sw, $sh) {
 			imagecopyresized($this->image_, $image, $x, $y, $sx, $sy, $w, $h, $sw, $sh);
 		}
